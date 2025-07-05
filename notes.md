@@ -32,3 +32,29 @@ console.log("Hello from module!");
   console.log("Hello from module!");
 });
 ```
+
+## Node Package Manager
+
+- default package manager for NodeJs
+- helps to use any third-party packages in the code
+- manage your projects, dependencies, run scripts defined in package.json file
+
+- **package.json** - heart of any Nodejs project - contains meta-data about your project - manages dependencies, dev-dependencies, scripts and project info
+- use `npm init` (detaisl to be filled manually) or `npm init -y` (details filled automatically)
+- example of a `package.json` file
+
+```json
+{
+  "name": "03.node-package-manager",
+  "version": "1.0.0",
+  "description": "node package manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "anand kumar",
+  "license": "ISC"
+}
+```
+
+- **dependencies and dev-dependencies** : dependencies are all the packages required to run the project in production ; dev-dependencies are only needed for local developement and testing purposes
