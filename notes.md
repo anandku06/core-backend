@@ -58,3 +58,20 @@ console.log("Hello from module!");
 ```
 
 - **dependencies and dev-dependencies** : dependencies are all the packages required to run the project in production ; dev-dependencies are only needed for local developement and testing purposes
+```bash
+# for package installation
+npm install <package_name>
+npm i <package_name>
+
+# package name should be genuine,
+# multiple packages can be given as well but each seperated with commas, 
+npm i <package1> <package2> <package3>
+# after installation, the package name with its version, is recorded in the `package.json` and `package-lock.json` files
+
+npm uninstall <package_name> # to uninstall any package
+
+npm update # to update any package
+
+npm run <script_name> # to run any scripts define in package.json file
+
+```
