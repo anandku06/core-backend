@@ -75,3 +75,8 @@ npm update # to update any package
 npm run <script_name> # to run any scripts define in package.json file
 
 ```
+
+## path module
+
+- The path module in Node.js is a built-in module used for handling and transforming file and directory paths in a platform-independent way (i.e., works the same on Windows, Linux, macOS, etc.).
+- provides utilities for working with files and directories paths
