@@ -58,13 +58,14 @@ console.log("Hello from module!");
 ```
 
 - **dependencies and dev-dependencies** : dependencies are all the packages required to run the project in production ; dev-dependencies are only needed for local developement and testing purposes
+
 ```bash
 # for package installation
 npm install <package_name>
 npm i <package_name>
 
 # package name should be genuine,
-# multiple packages can be given as well but each seperated with commas, 
+# multiple packages can be given as well but each seperated with commas,
 npm i <package1> <package2> <package3>
 # after installation, the package name with its version, is recorded in the `package.json` and `package-lock.json` files
 
@@ -80,3 +81,12 @@ npm run <script_name> # to run any scripts define in package.json file
 
 - The path module in Node.js is a built-in module used for handling and transforming file and directory paths in a platform-independent way (i.e., works the same on Windows, Linux, macOS, etc.).
 - provides utilities for working with files and directories paths
+
+## file system
+
+- allows you to interact with the file system to read, write, update, delete, and manipulate files and directories.
+
+```javascript
+const fs = require("fs"); // Callback & Sync API
+const fsPromises = require("fs/promises"); // Promise-based API (preferred with async/await)
+```
