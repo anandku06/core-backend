@@ -90,3 +90,30 @@ npm run <script_name> # to run any scripts define in package.json file
 const fs = require("fs"); // Callback & Sync API
 const fsPromises = require("fs/promises"); // Promise-based API (preferred with async/await)
 ```
+
+## http module
+
+- The http module in Node.js is a built-in module that allows you to create an HTTP server and handle HTTP requests and responses.
+- It's one of the core modules, meaning you don't need to install anything to use it—just require it in your script.
+
+```javascript
+// importing the module
+const http = require("http");
+
+// 🚀 Creating a Basic HTTP Server
+
+// Create a server
+const server = http.createServer((req, res) => {
+  res.statusCode = 200; // HTTP Status OK
+  res.setHeader("Content-Type", "text/plain");
+  res.end("Hello, World!\n"); // Response body
+});
+
+// Server listens on port 3000
+server.listen(3000, () => {
+  console.log("Server is running at http://localhost:3000/");
+});
+```
+
+- req (IncomingMessage): Contains details about the client's request (like URL, method, headers, etc.)
+- res (ServerResponse): Used to construct and send back the HTTP response.
