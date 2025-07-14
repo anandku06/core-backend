@@ -171,3 +171,20 @@ myPromise
   .catch((error) => console.error(error))
   .finally(() => console.log("Promise completed"));
 ```
+
+## Async/Await
+
+- Syntactic sugar over promises, making async code look synchronous.
+- Declared with the async keyword, these functions always return a Promise, even if the return value is not explicitly a Promise.
+- **Await Keyword**: Used inside async functions to pause execution until a Promise resolves or rejects. It can only be used within an async function.
+- handle asynchronous operations in a more readable, synchronous-like manner, avoiding the complexity of callback chains or nested .then() calls.
+
+```javascript
+async function fetchData() {
+  const data = await new Promise((resolve) =>
+    setTimeout(() => resolve("Data"), 1000)
+  );
+  return data;
+}
+fetchData().then((result) => console.log(result)); // Output: Data (after 1s)
+```
