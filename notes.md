@@ -117,3 +117,24 @@ server.listen(3000, () => {
 
 - req (IncomingMessage): Contains details about the client's request (like URL, method, headers, etc.)
 - res (ServerResponse): Used to construct and send back the HTTP response.
+
+
+## callbacks
+
+- functions that are passed to other functions as arguments
+- defers an execution of a code until or unless a specific async operation completes
+- commonly used in NodeJS
+
+**Callback Hell** : when you have multiple nested callbacks that are executed one by one
+```javascript
+
+// example of a callback hell
+setTimeout(() => {
+  setTimeout(() => {
+    setTimeout(() => {
+      ...
+    })
+  })
+})
+
+```
