@@ -118,7 +118,6 @@ server.listen(3000, () => {
 - req (IncomingMessage): Contains details about the client's request (like URL, method, headers, etc.)
 - res (ServerResponse): Used to construct and send back the HTTP response.
 
-
 ## callbacks
 
 - functions that are passed to other functions as arguments
@@ -126,6 +125,7 @@ server.listen(3000, () => {
 - commonly used in NodeJS
 
 **Callback Hell** : when you have multiple nested callbacks that are executed one by one
+
 ```javascript
 
 // example of a callback hell
@@ -137,4 +137,37 @@ setTimeout(() => {
   })
 })
 
+```
+
+## Promises
+
+- Promises in Node.js are a way to handle asynchronous operations, providing a cleaner alternative to callbacks for managing tasks like file operations, network requests, or database queries.
+- They represent a value that may be available now, in the future, or never, with three states: pending, fulfilled, or rejected.
+- **Promise Creation**: A Promise is created using the Promise constructor, which takes a function with resolve and reject parameters.
+- _States_:
+  - Pending: Initial state, neither fulfilled nor rejected.
+  - Fulfilled: Operation completed successfully, with a result.
+  - Rejected: Operation failed, with an error.
+- _Methods_:
+  - .then(): Handles fulfilled promises, receiving the resolved value.
+  - .catch(): Handles rejected promises, receiving the error.
+  - .finally(): Executes code regardless of the promise's outcome.
+- **Chaining**: Promises can be chained with multiple .then() calls for sequential async operations.
+
+```javascript
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const success = true; // Simulating an async operation
+    if (success) {
+      resolve("Operation successful!");
+    } else {
+      reject("Operation failed!");
+    }
+  }, 1000);
+});
+
+myPromise
+  .then((result) => console.log(result)) // Output: Operation successful!
+  .catch((error) => console.error(error))
+  .finally(() => console.log("Promise completed"));
 ```
