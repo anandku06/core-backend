@@ -188,3 +188,20 @@ async function fetchData() {
 }
 fetchData().then((result) => console.log(result)); // Output: Data (after 1s)
 ```
+
+## Event Emitter
+
+- a class in the `events` module that allows objects to emit named events and register functions (listeners) to respond to those events
+
+```javascript
+const EventEmitter = require("events");
+const emitter = new EventEmitter();
+
+// Listener
+emitter.on("greet", (name) => {
+  console.log(`Hello, ${name}!`);
+});
+
+// Emit event
+emitter.emit("greet", "Anand");
+```
