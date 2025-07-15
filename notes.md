@@ -205,3 +205,29 @@ emitter.on("greet", (name) => {
 // Emit event
 emitter.emit("greet", "Anand");
 ```
+
+## ExpressJS
+
+- web framework for NodeJS
+- simplifies routing, middleware, and handling HTTP requests
+- used to create RESTful APIs and full-stack web applications
+
+```bash
+# installing ExpressJS
+npm i express
+```
+
+```javascript
+// basic express server setup
+const express = require("express");
+const app = express();
+const PORT = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+```
