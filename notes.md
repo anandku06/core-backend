@@ -231,3 +231,8 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 ```
+- **Application Level Settings** : are configuration options that control how your Express application behaves.
+  - They allow you to:
+    - Configure your app to behave differently in development vs production
+    - Enable/disable headers for security or privacy.
+    - Set up template engines and other app-wide settings.
