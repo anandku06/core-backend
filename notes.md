@@ -236,3 +236,6 @@ app.listen(PORT, () => {
     - Configure your app to behave differently in development vs production
     - Enable/disable headers for security or privacy.
     - Set up template engines and other app-wide settings.
+- **Middlewares** :
+  - functions that have access to the request object(req), the response object(res), and the next middleware function in the application's request-response cycle.
+  - The `next` middleware function is commonly denoted by a variable named `next`.
