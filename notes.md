@@ -231,6 +231,7 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 ```
+
 - **Application Level Settings** : are configuration options that control how your Express application behaves.
   - They allow you to:
     - Configure your app to behave differently in development vs production
@@ -239,7 +240,6 @@ app.listen(PORT, () => {
 - **Middlewares** :
   - functions that have access to the request object(req), the response object(res), and the next middleware function in the application's request-response cycle.
   - The `next` middleware function is commonly denoted by a variable named `next`.
-
 
 ## EJS
 
@@ -250,4 +250,17 @@ app.listen(PORT, () => {
 ```bash
 # to install EJS
 npm install ejs
+```
+
+```ejs
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+</head>
+<body>
+  <h1>Welcome, <%= user %>!</h1>
+</body>
+</html>
+
 ```
