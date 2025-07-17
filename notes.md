@@ -239,3 +239,15 @@ app.listen(PORT, () => {
 - **Middlewares** :
   - functions that have access to the request object(req), the response object(res), and the next middleware function in the application's request-response cycle.
   - The `next` middleware function is commonly denoted by a variable named `next`.
+
+
+## EJS
+
+- Embedded JavaScript Templates
+- a simple templating engine that lets you generate HTML markup with plain JS
+- widely used in NodeJS with Express to render dynamic content in web applications.
+
+```bash
+# to install EJS
+npm install ejs
+```

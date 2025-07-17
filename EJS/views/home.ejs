@@ -1,0 +1,12 @@
+<!-- including the header component -->
+<%- include("components/header.ejs") %>
+
+<h1>Welcome to <%= title %></h1>
+<label>List of Products</label>
+
+<!-- using the foreach loop to render the products from res.render() -->
+<ul>
+  <% products.forEach(product => { %>
+  <li><%= product.name %></li>
+  <% }); %>
+</ul>
