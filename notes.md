@@ -264,3 +264,11 @@ npm install ejs
 </html>
 
 ```
+
+## REST API
+- REpresentational State Transfer
+- a way for different systems (like frontend and backend) to communicate over the internet using standard **HTTP methods** (GET, POST, PUT, DELETE, etc.)
+- follows a stateless, resource-based architecture
+- `express.json()` : a built-in middleware function in Express.js that parses incoming JSON payloads and makes the parsed data available under `req.body`.
+- When a client (like Postman, frontend, or mobile app) sends a JSON payload in the body of an HTTP request (typically a POST, PUT, or PATCH request), the raw body needs to be parsed into a usable JavaScript object.
+- Without express.json(), req.body would be undefined.
