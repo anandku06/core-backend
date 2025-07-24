@@ -272,3 +272,8 @@ npm install ejs
 - `express.json()` : a built-in middleware function in Express.js that parses incoming JSON payloads and makes the parsed data available under `req.body`.
 - When a client (like Postman, frontend, or mobile app) sends a JSON payload in the body of an HTTP request (typically a POST, PUT, or PATCH request), the raw body needs to be parsed into a usable JavaScript object.
 - Without express.json(), req.body would be undefined.
+
+## MongoDB
+
+- a **No-SQL Database** designed for high performance, high availability, and easy scalability.
+- Instead of storing data in tables like traditional relational databases (like MySQL), MongoDB stores data in flexible, **JSON-like** documents.
