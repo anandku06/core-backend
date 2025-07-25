@@ -277,3 +277,5 @@ npm install ejs
 
 - a **No-SQL Database** designed for high performance, high availability, and easy scalability.
 - Instead of storing data in tables like traditional relational databases (like MySQL), MongoDB stores data in flexible, **JSON-like** documents.
+- Needs an MongoDB String to connect with the database through NodeJS and it's stored inside the `.env` file.
+- `.env` file is for some credentials that are private and should not be pushed on GitHub, like MongoDB string, API Keys, etc. we put these things in this file.
