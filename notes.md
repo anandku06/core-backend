@@ -240,7 +240,7 @@ app.listen(PORT, () => {
 - **Middlewares** :
   - functions that have access to the request object(req), the response object(res), and the next middleware function in the application's request-response cycle.
   - The `next` middleware function is commonly denoted by a variable named `next`.
-
+- **Express Router** : An Express Router is a special object that acts like a "mini-application" within your main Express app. Its primary purpose is to help you organize and group your application's routes into modular, manageable files.
 ## EJS
 
 - Embedded JavaScript Templates
