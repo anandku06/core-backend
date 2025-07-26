@@ -17,3 +17,5 @@ const updateBook = async (req, res) => {
 const deleteBook = async (req, res) => {
 
 }
+
+module.exports = {getAllBooks, getSingleBook, deleteBook, addNewBook, updateBook}
