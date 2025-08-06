@@ -21,3 +21,5 @@ const loginUser = async (res, req) => {
     });
   }
 };
+
+module.exports = {loginUser, registerUser}
