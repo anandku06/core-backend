@@ -10,7 +10,7 @@ const registerUser = async (res, req) => {
   }
 };
 
-// login user 
+// login user
 const loginUser = async (res, req) => {
   try {
   } catch (error) {
@@ -22,4 +22,4 @@ const loginUser = async (res, req) => {
   }
 };
 
-module.exports = {loginUser, registerUser}
+module.exports = { loginUser, registerUser };
