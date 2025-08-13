@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcyrpt = require("bcryptjs");
 
 // register User
 const registerUser = async (res, req) => {
@@ -13,6 +14,32 @@ const registerUser = async (res, req) => {
       return res.status(400).json({
         success: false,
         message: "User already exists, try with different username or email",
+      });
+    }
+
+    // hash user password
+    const salt = await bcrypt.genSalt(); // Asynchronously generates a salt.
+    const hashedPass = await bcyrpt.hash(password, salt); // Asynchronously generates a hash for the given password.
+
+    // create a new user
+    const newUser = await User({
+      username,
+      email,
+      password: hashedPass,
+      role: role || "user",
+    });
+
+    await newUser.save();
+
+    if (newUser) {
+      return res.status(201).json({
+        success: true,
+        message: "User created successfully",
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "User creation failed!!",
       });
     }
   } catch (error) {

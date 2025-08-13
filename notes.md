@@ -279,3 +279,20 @@ npm install ejs
 - Instead of storing data in tables like traditional relational databases (like MySQL), MongoDB stores data in flexible, **JSON-like** documents.
 - Needs an MongoDB String to connect with the database through NodeJS and it's stored inside the `.env` file.
 - `.env` file is for some credentials that are private and should not be pushed on GitHub, like MongoDB string, API Keys, etc. we put these things in this file.
+
+## bcryptjs
+- a password hashing algorithm
+- hashes the user's password before storing into DB
+- uses a salt-generating algo to hash passwords more securely
+```bash
+npm i bcryptjs # installs the bcryptjs package
+
+```
+
+```javascript
+const bcrypt = require("bcryptjs")
+
+const salt = await bcrypt.genSalt() // generates a salt(random-string) that is used in hashing the password, for more uniqueness
+const hashedPass = await bcrypt.hash(password, salt) // generates the hashed password using the salt generated earlier
+
+```
