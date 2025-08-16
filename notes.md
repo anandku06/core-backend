@@ -296,3 +296,114 @@ const salt = await bcrypt.genSalt() // generates a salt(random-string) that is u
 const hashedPass = await bcrypt.hash(password, salt) // generates the hashed password using the salt generated earlier
 
 ```
+
+## Tokens
+- a digital key string in your backend
+- gives client the necessary info regarding the logged in user
+- avoids the need of password entering at every route visit
+- For **Auth**: if the user enters correct password and username, a **bearer token** is made to store the logged-in user info
+- **Types of Tokens**
+  1. Session Tokens : Old School method, server gives session id and stores in cookies
+  2. JWT (JSON Web Tokens) : compact string, backend verifies then allows/denies request, having 3 parts -
+    - Header
+    - Payload
+    - Signature
+  3. OAuth Tokens - for third-party authentication like Github, Google, etc. ; Refresh Toekn + Access Token
+  4. API Keys : Simple tokens for server-to-server communication
+  
+## JWT
+
+- **JSON Web Tokens**
+- an open, industry-standard method for securely transmitting information between two parties as a compact JSON object.
+- Think of a JWT as a secure event wristband. 🎟️
+
+- It’s issued by a trusted authority (the ticket counter/login server).
+
+- It contains information about you (your access level, e.g., "VIP").
+
+- It has a security feature (a unique hologram) that proves it's authentic and hasn't been faked.
+
+- Security staff (the server's protected routes) can glance at your wristband to grant you access without needing to look you up in their main list every time.
+
+### The Structure of a JWT
+- A JWT consists of three parts separated by dots (.): the Header, the Payload, and the Signature.
+
+```xxxxx.yyyyy.zzzzz (Header.Payload.Signature)```
+
+1. Header
+The header typically consists of two parts: the token type (typ), which is JWT, and the signing algorithm (alg) being used, such as HMAC SHA256 (HS256) or RSA. This JSON is then Base64Url encoded to form the first part of the JWT.
+
+Example JSON:
+
+```json
+
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+// Encoded Result: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+2. Payload 📜
+The payload contains the claims, which are statements about an entity (typically the user) and additional data. The claims are the information you want to transmit securely.
+
+There are three types of claims:
+
+Registered claims: Standardized claims like iss (issuer), exp (expiration time), and sub (subject/user ID). These are not mandatory but are recommended.
+
+Public claims: These can be defined at will but should be named carefully to avoid collisions.
+
+Private claims: Custom claims created to share information between parties that agree on using them.
+
+Crucially, the payload is only Base64Url encoded, not encrypted. This means anyone can decode it and read its contents. Therefore, you should never put sensitive information like passwords in the payload.
+
+Example JSON:
+
+```JSON
+{
+  "sub": "1234567890",
+  "name": "Aarav Sharma",
+  "role": "admin",
+  "iat": 1516239022
+}
+// Encoded Result: eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFhcmF2IFNoYXJtYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTUxNjIzOTAyMn0
+```
+3. Signature 🛡️
+The signature is used to verify the token's integrity. It ensures that the token hasn't been tampered with and, in the case of a private key, that it was sent by the intended issuer.
+
+To create the signature, you take:
+
+The encoded header
+
+The encoded payload
+
+A secret key known only to the server
+
+The algorithm specified in the header
+
+The signature is created by signing the first two parts with the secret. For example, using the HS256 algorithm:
+
+```
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  your-256-bit-secret
+)
+```
+If a malicious user changes the header or payload, the signature will no longer match when the server re-calculates it, and the token will be rejected.
+
+### How Does It Work?
+- The authentication flow is straightforward:
+1. Login: The user provides their credentials (e.g., email and password) to the server.
+
+2. Verification: The server validates the credentials.
+
+3. Token Creation: If the credentials are valid, the server creates a JWT by defining a header and payload, and then signs it using its private secret key.
+
+4. Token Sent to Client: The server sends this JWT back to the client.
+
+5. Client Storage: The client stores the JWT, typically in localStorage, sessionStorage, or a secure HttpOnly cookie.
+
+6. Authenticated Requests: For every subsequent request to a protected route or resource, the client sends the JWT in the Authorization header using the Bearer schema.
+
+```Authorization: Bearer <your-jwt-token>```
+7. Server Verification: The server receives the token, reads the header to see which algorithm was used, and then uses its secret key to re-calculate the signature. It compares the new signature with the one on the token. If they match, the server trusts the token and processes the request. It will also typically check claims like the expiration date (exp).
