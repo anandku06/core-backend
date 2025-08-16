@@ -344,17 +344,17 @@ Example JSON:
 // Encoded Result: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 2. Payload 📜
-The payload contains the claims, which are statements about an entity (typically the user) and additional data. The claims are the information you want to transmit securely.
+- The payload contains the claims, which are statements about an entity (typically the user) and additional data. The claims are the information you want to transmit securely.
 
-There are three types of claims:
+- There are three types of claims:
 
-Registered claims: Standardized claims like iss (issuer), exp (expiration time), and sub (subject/user ID). These are not mandatory but are recommended.
+1. Registered claims: Standardized claims like iss (issuer), exp (expiration time), and sub (subject/user ID). These are not mandatory but are recommended.
 
-Public claims: These can be defined at will but should be named carefully to avoid collisions.
+2. Public claims: These can be defined at will but should be named carefully to avoid collisions.
 
-Private claims: Custom claims created to share information between parties that agree on using them.
+3. Private claims: Custom claims created to share information between parties that agree on using them.
 
-Crucially, the payload is only Base64Url encoded, not encrypted. This means anyone can decode it and read its contents. Therefore, you should never put sensitive information like passwords in the payload.
+- Crucially, the payload is only Base64Url encoded, not encrypted. This means anyone can decode it and read its contents. Therefore, you should never put sensitive information like passwords in the payload.
 
 Example JSON:
 
@@ -368,19 +368,19 @@ Example JSON:
 // Encoded Result: eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFhcmF2IFNoYXJtYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTUxNjIzOTAyMn0
 ```
 3. Signature 🛡️
-The signature is used to verify the token's integrity. It ensures that the token hasn't been tampered with and, in the case of a private key, that it was sent by the intended issuer.
+- The signature is used to verify the token's integrity. It ensures that the token hasn't been tampered with and, in the case of a private key, that it was sent by the intended issuer.
 
-To create the signature, you take:
+- To create the signature, you take:
 
-The encoded header
+1. The encoded header
 
-The encoded payload
+2. The encoded payload
 
-A secret key known only to the server
+3. A secret key known only to the server
 
-The algorithm specified in the header
+4. The algorithm specified in the header
 
-The signature is created by signing the first two parts with the secret. For example, using the HS256 algorithm:
+5. The signature is created by signing the first two parts with the secret. For example, using the HS256 algorithm:
 
 ```
 HMACSHA256(
@@ -389,7 +389,7 @@ HMACSHA256(
   your-256-bit-secret
 )
 ```
-If a malicious user changes the header or payload, the signature will no longer match when the server re-calculates it, and the token will be rejected.
+- If a malicious user changes the header or payload, the signature will no longer match when the server re-calculates it, and the token will be rejected.
 
 ### How Does It Work?
 - The authentication flow is straightforward:
