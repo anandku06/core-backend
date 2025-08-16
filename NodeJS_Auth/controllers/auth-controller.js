@@ -1,8 +1,8 @@
 const User = require("../models/User");
-const bcyrpt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 
 // register User
-const registerUser = async (res, req) => {
+const registerUser = async (req, res) => {
   try {
     // extract user info
     const { username, email, password, role } = req.body;
@@ -19,7 +19,7 @@ const registerUser = async (res, req) => {
 
     // hash user password
     const salt = await bcrypt.genSalt(); // Asynchronously generates a salt.
-    const hashedPass = await bcyrpt.hash(password, salt); // Asynchronously generates a hash for the given password.
+    const hashedPass = await bcrypt.hash(password, salt); // Asynchronously generates a hash for the given password.
 
     // create a new user
     const newUser = await User({
@@ -45,7 +45,7 @@ const registerUser = async (res, req) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      success: true,
+      success: false,
       message: "Something went wrong!!",
     });
   }
@@ -57,7 +57,7 @@ const loginUser = async (res, req) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      success: true,
+      success: false,
       message: "Something went wrong!!",
     });
   }
