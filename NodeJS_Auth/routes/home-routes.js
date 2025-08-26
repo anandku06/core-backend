@@ -6,8 +6,15 @@ const router = express.Router();
 // the get method can take handler functions that are used for auth, and much more things
 
 router.get("/", authMiddleware, (req, res) => {
+  const { username, userId, role } = req.userInfo;
+
   res.json({
     message: "Welcome to the Home Page!",
+    user: {
+      _id: userId,
+      username,
+      role,
+    },
   });
 });
 // now whenever this route is called, the handler function "authMiddleware" will be called before the actual response
