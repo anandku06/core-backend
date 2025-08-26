@@ -16,7 +16,8 @@ const authMiddleware = (req, res, next) => {
     try {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY) // Synchronously verify given token using a secret or a public key to get a decoded token token
 
-        req.userInfo = decodedToken
+        req.userInfo = decodedToken // now this made a new key-value in the req object
+        // it can be accessed using the req object
         next()
 
     } catch (error) {
