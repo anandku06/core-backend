@@ -407,3 +407,8 @@ HMACSHA256(
 
 ```Authorization: Bearer <your-jwt-token>```
 7. Server Verification: The server receives the token, reads the header to see which algorithm was used, and then uses its secret key to re-calculate the signature. It compares the new signature with the one on the token. If they match, the server trusts the token and processes the request. It will also typically check claims like the expiration date (exp).
+
+## File uploading
+
+- In express, using `multer` and `cloudinary` npm packages for it.
+- Require you to first structure the schema for the file you want to be uploaded
