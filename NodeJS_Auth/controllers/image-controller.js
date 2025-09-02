@@ -1,5 +1,7 @@
 const Image = require("../models/Image")
 const {uploadToCloudinary} = require("../helpers/cloudinaryHelper")
+const fs = require("fs")
+
 
 const uploadImage = async (req, res) => {
     try {
@@ -22,6 +24,9 @@ const uploadImage = async (req, res) => {
         })
 
         await newUploadedImage.save()
+
+        // delete the file from the local storage
+        fs.unlinkSync(req.file.path)
 
         res.status(201).json({
             success : true,
