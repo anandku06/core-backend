@@ -412,3 +412,6 @@ HMACSHA256(
 
 - In express, using `multer` and `cloudinary` npm packages for it.
 - Require you to first structure the schema for the file you want to be uploaded
+
+### Multer
+- a node.js middleware for handling `multipart/form-data`, which is primarily used for uploading files
