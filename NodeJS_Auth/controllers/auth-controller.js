@@ -110,7 +110,7 @@ const changePassword = async (req, res) => {
     const { oldPass, newPass } = req.body;
 
     // current logged in user
-    const user = await User.findOne(userId);
+    const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({

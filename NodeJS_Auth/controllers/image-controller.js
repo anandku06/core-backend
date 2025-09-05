@@ -45,7 +45,10 @@ const uploadImage = async (req, res) => {
 
 const fetchImage = async (req, res) => {
     try {
-        const images = await Image.find()
+        const user = req.userInfo.userId
+        const images = await Image.find({
+            uploadedBy : user
+        })
 
         if(images) {
             res.status(200).json({
