@@ -1,6 +1,7 @@
 const Image = require("../models/Image")
 const {uploadToCloudinary} = require("../helpers/cloudinaryHelper")
 const fs = require("fs")
+const cloudinary_js_config  = require("../config/cloudinary")
 
 
 const uploadImage = async (req, res) => {
@@ -65,7 +66,44 @@ const fetchImage = async (req, res) => {
     }
 }
 
+const deleteImage = async (req, res) => {
+    try {
+        const getImageId = req.params.id
+        const userId = req.userInfo.userId
+
+        const image = await Image.findById(getImageId)
+        if(!image) {
+            return res.status(404).json({
+                success : false,
+                message : "Image not found!!"
+            })
+        }
+
+        // check if this image uplaoded by the logged-in user
+        // but the images shown are according to the user so it isn't needed
+
+        // delete this image from the cloudinary
+        await cloudinary_js_config.uploader.destroy(image.publicId)
+
+        // delete this from the mongodb
+        await Image.findByIdAndDelete(getImageId)
+
+        res.status(200).json({
+            success : true,
+            message : "Image deleted successfully!"
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success : false,
+            message : "Something went wrong!!"
+        })
+    }
+}
+
 module.exports = {
     uploadImage,
-    fetchImage
+    fetchImage,
+    deleteImage
 }
