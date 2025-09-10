@@ -415,3 +415,27 @@ HMACSHA256(
 
 ### Multer
 - a node.js middleware for handling `multipart/form-data`, which is primarily used for uploading files
+
+## Pagination
+
+- process of splitting a large amount of data into smaller, seperate chunks called "pages".
+- Instead of sending thousands of records to a user all at once, you send a manageable amount, like 10 or 20, and provide a way to ask for the next chunk.
+
+### How does it work?
+- The entire process is a conversation between the **client** (frontend) and the **server** (backend).
+- client makes a request to an API endpoint and includes two pieces of information in the URL, called **query parameters**:
+1. `page`: which page number the user want to see.
+2. `limit` or (`pageSize`): how many items should be on each page.
+
+- Let's say a user wants to see the second page of products, with 10 products per page. The client would an API call like this:
+`GET https://api.example.com/products?page=2&limit=10`
+
+- Now, here's how the server handles this request:
+1. Recieve the request and extract the `page` and `limit` values from the query parameters.
+2. Calculate the `offset`, which tells the server how many items to skip before starting to collect the items for the current page. The formula is:
+`offset = (page - 1) * limit`
+3. Query the database to get the total number of items available. This helps the server know how many pages there are in total.
+4. Fetch the specific items for the requested page using the `limit` and `offset`.
+5. Send back a response to the client that includes:
+   - The items for the current page.
+   - Metadata like the current page number, total pages, total items, and items per page.

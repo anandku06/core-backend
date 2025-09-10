@@ -46,14 +46,29 @@ const uploadImage = async (req, res) => {
 
 const fetchImage = async (req, res) => {
     try {
+        const page = parseInt(req.query.page) || 1 // returns which page or else 1
+        const limit = parseInt(req.query.limit) || 5 // how many items per page or else 5
+        const skip = (page - 1) * limit // how many items to skip according to the page
+
+        const sortBy = req.query.sortBy || 'createdAt' // which field to sort by or else createdAt
+        const sortOrder = req.query.sortOrder === 'asc' ? 1 : -1 // sort order, asc or desc, default desc
+        const totalImages = await Image.countDocuments() // total number of images
+        const totalPages = Math.ceil(totalImages / limit) // total number of pages
+
+        const sortObj = {}
+        sortObj[sortBy] = sortOrder
+
         const user = req.userInfo.userId
         const images = await Image.find({
             uploadedBy : user
-        })
+        }).sort(sortObj).skip(skip).limit(limit)
 
         if(images) {
             res.status(200).json({
                 success : true,
+                currentPage : page,
+                totalPages : totalPages,
+                totalImages : totalImages,
                 data : images
             })
         }
