@@ -4,11 +4,12 @@ const productRoutes = require('./routes/product-routes')
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
+const MONGO_URI = process.env.MONGODB_URI;
 
 // connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
   })
