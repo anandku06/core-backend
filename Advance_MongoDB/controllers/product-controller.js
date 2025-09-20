@@ -1,5 +1,30 @@
 const Product = require("../models/Product");
 
+const getProducts = async (req, res) => {
+  try {
+    const result = await Product.aggregate([
+      {
+        $match: {
+          inStock: true,
+          price: { $lt: 100 },
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      success: true,
+      message: "Products fetched successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong!",
+    });
+  }
+};
+
 const insertProducts = async (req, res) => {
   try {
     const products = [
@@ -41,7 +66,7 @@ const insertProducts = async (req, res) => {
     ];
 
     const result = await Product.insertMany(products);
-    
+
     res.status(200).json({
       success: true,
       message: "Products inserted successfully",
@@ -56,4 +81,4 @@ const insertProducts = async (req, res) => {
   }
 };
 
-module.exports = { insertProducts };
+module.exports = { insertProducts, getProducts };
