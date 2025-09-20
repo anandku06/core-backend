@@ -1,12 +1,21 @@
 const Product = require("../models/Product");
 
-const getProducts = async (req, res) => {
+const getProductStats = async (req, res) => {
   try {
     const result = await Product.aggregate([
       {
         $match: {
           inStock: true,
-          price: { $lt: 100 },
+          price: { $gt: 100 },
+        },
+      },
+      {
+        $group: {
+          _id: "$category",
+          avgPrice: {
+            $avg: "$price",
+          },
+          count: { $sum: 1 },
         },
       },
     ]);
@@ -14,6 +23,49 @@ const getProducts = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Products fetched successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong!",
+    });
+  }
+};
+
+const getProductAnalysis = async (req, res) => {
+  try {
+    const result = await Product.aggregate([
+      {
+        $match: {
+          category: "Electronics",
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalRevenue: { $sum: "$price" },
+          avgPrice: { $avg: "$price" },
+          maxPrice: { $max: "$price" },
+          minPrice: { $min: "$price" },
+        },
+      },
+      {
+        $project: {
+            _id: 0,
+            totalRevenue: 1,
+            avgPrice: 1,
+            maxPrice: 1,
+            minPrice: 1,
+            priceRange: { $subtract: ["$maxPrice", "$minPrice"]}
+        }
+      }
+    ]);
+
+    res.status(200).json({
+      success: true,
+      message: "Product analysis fetched successfully",
       data: result,
     });
   } catch (error) {
@@ -81,4 +133,4 @@ const insertProducts = async (req, res) => {
   }
 };
 
-module.exports = { insertProducts, getProducts };
+module.exports = { insertProducts, getProductStats, getProductAnalysis };
