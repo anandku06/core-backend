@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const productRoutes = require('./routes/product-routes')
 require("dotenv").config();
 
 const app = express();
@@ -16,10 +17,7 @@ mongoose
   });
 
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Hello, MongoDB with Express!");
-});
+app.use('/products', productRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
