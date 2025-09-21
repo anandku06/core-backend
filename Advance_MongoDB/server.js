@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const productRoutes = require('./routes/product-routes')
+const bookRoutes = require('./routes/book-routes')
 require("dotenv").config();
 
 const app = express();
@@ -19,6 +20,7 @@ mongoose
 
 app.use(express.json());
 app.use('/products', productRoutes)
+app.use('/reference', bookRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
