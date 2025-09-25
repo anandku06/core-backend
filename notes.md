@@ -439,3 +439,18 @@ HMACSHA256(
 5. Send back a response to the client that includes:
    - The items for the current page.
    - Metadata like the current page number, total pages, total items, and items per page.
+
+## Socket.IO
+
+- a library that enables real-time, bidirectional, and event-based communication between web clients and servers.
+- It allows you to build applications where the server can push updates to clients instantly, without the need for clients to continuously poll the server for new information.
+- commonly used for chat applications, live notifications, real-time analytics, and collaborative tools.
+- works on every platform, browser, or device, focusing equally on reliability and speed.
+- built on top of WebSockets, but also provides fallbacks to other techniques like long polling for environments where WebSockets are not supported.
+
+### How does it work?
+1. **Establishing a Connection**: When a client (like a web browser) connects to a server using Socket.IO, it first establishes a WebSocket connection. If WebSockets are not supported, it falls back to other methods like long polling.
+2. **Event-Driven Communication**: Both the client and server can emit and listen for events. This means that either side can send messages to the other side whenever they want, without waiting for a request.
+3. **Namespaces**: Socket.IO supports namespaces, which allow you to create separate communication channels within the same connection. This is useful for organizing different parts of your application.
+4. **Rooms**: Within namespaces, you can create rooms. Rooms are groups of sockets that can be used to broadcast messages to multiple clients at once. For example, in a chat application, each chat room can be a separate room.
+5. **Broadcasting**: You can send messages to all connected clients, to specific rooms, or to individual clients. This flexibility allows for a wide range of real-time communication patterns.
