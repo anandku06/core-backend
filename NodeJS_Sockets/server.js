@@ -14,18 +14,24 @@ app.use(express.static("public"));
 
 // handle users when they connect
 // on method is used to listen for incoming connections from clients, and the callback function is executed when a new client connects
-socketIo.on("join", (userName) => {
+io.on("join", (userName) => {
     users.add(userName);
 
     // broadcast to all users that a new user has joined
-    socketIo.emit("user-joined", userName);
+    io.emit("user-joined", userName);
     // emit method is used to send messages to all connected clients
 
     // send the updated list of active users to all clients
-    socketIo.emit("active-users", Array.from(users));
+    io.emit("active-users", Array.from(users));
 })
 
 
 // handle incoming chat messages
 
 // handle user disconnections
+
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

@@ -36,7 +36,21 @@
 
     const userName = prompt("Enter your username: ")
 
-    socket.emit('join', userName)  
+    socket.emit('join', userName)
+    
+    socket.on("user-joined", (userName) => {
+      addMessage(`${user} has joined the chat!!`)
+    })
+
+    function addMessage(input) {
+      const mssgElement = document.createElement("div")
+      mssgElement.textContent = input
+
+      chat.appendChild(mssgElement)
+
+      // scroll to the bottom of the chat container
+      chat.scrollTop = chat.scrollHeight
+    }
 
   </script>
 </html>
