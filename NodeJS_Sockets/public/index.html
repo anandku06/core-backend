@@ -23,4 +23,20 @@
       </form>
     </div>
   </body>
+
+  <script src="socket.io/socket.io.js"></script>
+
+  <script>
+    const socket = io();
+
+    const chat = document.getElementById("chat")
+    const userList = document.getElementById("users")
+    const messageForm = document.getElementById("message-form")
+    const messageInput = document.getElementById("message-input")
+
+    const userName = prompt("Enter your username: ")
+
+    socket.emit('join', userName)  
+
+  </script>
 </html>
