@@ -13,8 +13,11 @@ const io = socketIo(server);
 app.use(express.static("public"));
 
 // handle users when they connect
-// on method is used to listen for incoming connections from clients, and the callback function is executed when a new client connects
-io.on("join", (userName) => {
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  // on method is used to listen for incoming connections from clients, and the callback function is executed when a new client connects
+  socket.on("join", (userName) => {
     users.add(userName);
 
     // broadcast to all users that a new user has joined
@@ -23,15 +26,14 @@ io.on("join", (userName) => {
 
     // send the updated list of active users to all clients
     io.emit("active-users", Array.from(users));
-})
+  });
 
+  // handle incoming chat messages
 
-// handle incoming chat messages
-
-// handle user disconnections
-
+  // handle user disconnections
+});
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
