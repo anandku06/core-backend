@@ -14,8 +14,6 @@ app.use(express.static("public"));
 
 // handle users when they connect
 io.on("connection", (socket) => {
-  console.log("A user connected");
-
   // on method is used to listen for incoming connections from clients, and the callback function is executed when a new client connects
   socket.on("join", (userName) => {
     users.add(userName);
@@ -29,6 +27,11 @@ io.on("connection", (socket) => {
   });
 
   // handle incoming chat messages
+  socket.on("chatMessage", (message) => {
+    // broadcast the message to all users
+    io.emit("chatMessage", message);
+  })
+
 
   // handle user disconnections
 });

@@ -42,6 +42,27 @@
       addMessage(`${userName} has joined the chat!!`);
     });
 
+    socket.on("active-users", (users) => {
+      userList.innerHTML = users.map((user) => `<li> ${user} </li>`).join("");
+    });
+
+    //listen for chat messages from the server
+    socket.on('chatMessage', (mssg) => {
+      addMessage(`${mssg.userName} : ${mssg.text}`)
+    })
+
+    // handle form submission
+    messageForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const message = messageInput.value.trim();
+      if (message) {
+        socket.emit("chatMessage", { userName, text: message });
+      }
+
+      messageInput.value = "";
+    });
+
     function addMessage(input) {
       const mssgElement = document.createElement("div");
       mssgElement.textContent = input;
