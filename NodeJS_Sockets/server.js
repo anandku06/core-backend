@@ -17,6 +17,7 @@ io.on("connection", (socket) => {
   // on method is used to listen for incoming connections from clients, and the callback function is executed when a new client connects
   socket.on("join", (userName) => {
     users.add(userName);
+    socket.userName = userName
 
     // broadcast to all users that a new user has joined
     io.emit("user-joined", userName);
@@ -30,10 +31,24 @@ io.on("connection", (socket) => {
   socket.on("chatMessage", (message) => {
     // broadcast the message to all users
     io.emit("chatMessage", message);
-  })
-
+  });
 
   // handle user disconnections
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+
+    // updating users list
+    users.forEach(user => {
+      if(user === socket.userName){
+        users.delete(user)
+        io.emit('userLeft', user)
+
+        // sending the updated users
+        io.emit("active-users", Array.from(users))
+      }
+    })
+
+  });
 });
 
 const PORT = process.env.PORT || 3000;
