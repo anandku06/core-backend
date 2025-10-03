@@ -42,18 +42,18 @@
       addMessage(`${userName} has joined the chat!!`);
     });
 
-    socket.on('userLeft', (user) => {
-      addMessage(`${user} left!`)
-    })
+    socket.on("userLeft", (user) => {
+      addMessage(`${user} left!`);
+    });
 
     socket.on("active-users", (users) => {
       userList.innerHTML = users.map((user) => `<li> ${user} </li>`).join("");
     });
 
     //listen for chat messages from the server
-    socket.on('chatMessage', (mssg) => {
-      addMessage(`${mssg.userName} : ${mssg.text}`)
-    })
+    socket.on("chatMessage", (mssg) => {
+      addMessage(`${mssg.userName} : ${mssg.text}`);
+    });
 
     // handle form submission
     messageForm.addEventListener("submit", (e) => {
