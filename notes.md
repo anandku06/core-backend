@@ -624,3 +624,37 @@ server.listen(PORT, () => {
 - **Batching and Caching**: Techniques to optimize performance by reducing the number of requests and reusing previously fetched data.
 
 - In MongoDB, we define models and schemas for documents, but in GraphQL, we define schemas in which types and resolvers are specified.
+- GraphQL can be used with any database or even multiple databases in a single API.
+
+### Example
+
+- To define a simple GraphQL schema and set up a basic server using Apollo Server in Node.js:
+
+```javascript
+const { ApolloServer, gql } = require("apollo-server");
+
+// Define your schema
+const typeDefs = gql`
+  type Query {
+    hello: String! 
+  }
+`; // this typeDefs is the schema, which defines a Query type with a single field hello that returns a String.
+// The gql tag is a helper function that parses the schema definition string into a format that Apollo Server can understand.
+
+// Define your resolvers
+const resolvers = {
+  Query: {
+    hello: () => "Hello, world!"
+  }
+}; // this resolvers object maps the Query type to a function that returns the string "Hello, world!" when the hello field is queried.
+// The resolvers are responsible for fetching and returning the data for each field in the schema.
+
+// Create an instance of ApolloServer
+const server = new ApolloServer({ typeDefs, resolvers }); // this creates a new ApolloServer instance, passing in the typeDefs and resolvers we defined earlier.
+// This sets up the GraphQL server with the specified schema and resolvers.
+
+// Start the server
+server.listen().then(({ url }) => {
+  console.log(`Server ready at ${url}`);
+});
+```
