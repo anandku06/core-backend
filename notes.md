@@ -600,3 +600,27 @@ server.listen(PORT, () => {
    ```bash
    heroku logs --tail
    ```
+
+## GraphQL
+
+- a query language for APIs and a runtime for executing those queries with your existing data.
+- allows clients to request exactly the data they need, making it more efficient than traditional REST APIs
+- enables clients to aggregate data from multiple sources in a single request
+- developed by Facebook in 2012 and released as an open-source project in 2015
+
+### Key Concepts
+- **Schema**: Defines the structure of your API, including types, queries, and mutations.
+- **Queries**: Used to fetch data from the API.
+- **Mutations**: Used to modify data on the server.
+- **Resolvers**: Functions that handle fetching and returning the data for a specific field in the schema.
+- **Types**: Define the shape of the data, including fields and their types (e.g., String, Int, custom types).
+- **Subscriptions**: Allow clients to receive real-time updates from the server.
+- **Introspection**: Allows clients to query the schema itself to understand what queries and types are available.
+- **Directives**: Special instructions that can be attached to fields or fragments to modify their behavior (e.g., @include, @skip).
+- **Fragments**: Reusable units of a query that allow you to define a set of fields and include them in multiple queries or mutations.
+- **Variables**: Allow you to pass dynamic values into your queries and mutations, making them more flexible and reusable.
+- **Aliases**: Allow you to rename fields in the response, which is useful when querying the same field multiple times with different arguments.
+- **Error Handling**: GraphQL provides a structured way to handle errors, returning them in a consistent format alongside the data.
+- **Batching and Caching**: Techniques to optimize performance by reducing the number of requests and reusing previously fetched data.
+
+- In MongoDB, we define models and schemas for documents, but in GraphQL, we define schemas in which types and resolvers are specified.
