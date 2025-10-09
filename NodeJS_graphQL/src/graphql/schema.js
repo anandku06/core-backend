@@ -20,4 +20,4 @@ const typeDefs = gql`
 // ! means required field
 // we gave query type with two fields: products and product(id: ID!) that will take id as argument and return a single product
 
-module.exports = { typeDefs };
+module.exports = typeDefs;
