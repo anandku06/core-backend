@@ -1,4 +1,4 @@
-const { products } = require("../data/products.js");
+// const { products } = require("../data/products.js");
 
 // contains the resolver functions for the GraphQL API
 
