@@ -5,9 +5,9 @@ const { gql } = require("graphql-tag");
 const typeDefs = gql`
   type Product {
     id: ID!
-    name: String!
+    title: String!
     price: Float!
-    description: String!
+    category: String!
     inStock: Boolean!
   }
 
@@ -18,19 +18,19 @@ const typeDefs = gql`
 
   type Mutation {
     createProduct(
-      name: String!
+      title: String!
       price: Float!
-      description: String!
+      category: String!
       inStock: Boolean!
     ): Product!
 
-    deleteProduct(id: ID!): Product!
+    deleteProduct(id: ID!): Boolean!
 
     updateProduct(
       id: ID!
-      name: String
+      title: String
       price: Float
-      description: String
+      category: String
       inStock: Boolean
     ): Product!
   }

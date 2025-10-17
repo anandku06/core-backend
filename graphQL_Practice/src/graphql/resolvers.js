@@ -1,49 +1,23 @@
-// const { products } = require("../data/products.js");
-
-// contains the resolver functions for the GraphQL API
+const Product = require("../models/Product");
 
 const resolvers = {
   Query: {
-    products: () => products,
-    product: (_, { id }) => products.find((product) => product.id === id),
+    products: async () => await Product.find({}),
+    product: async (_, { id }) => await Product.findById(id),
   },
 
   Mutation: {
-    createProduct: (_, { name, price, description, inStock }) => {
-      const newProduct = {
-        id: String(products.length + 1),
-        name,
-        price,
-        description,
-        inStock,
-      };
-      products.push(newProduct);
-      return newProduct;
+    createProduct: async (_, args) => {
+      const newProduct = new Product(args);
+      return await newProduct.save();
     },
 
-    deleteProduct: (_, { id }) => {
-      const productIndex = products.findIndex((product) => product.id === id);
-      if (productIndex === -1) {
-        throw new Error("Product not found");
-      }
-      const deletedProduct = products[productIndex];
-      products.splice(productIndex, 1);
-      return deletedProduct;
+    deleteProduct: async (_, { id }) => {;
+      return !!await Product.findByIdAndDelete(id);
     },
 
-    updateProduct: (_, { id, ...updates }) => {
-      const productIndex = products.findIndex((product) => product.id === id);
-      if (productIndex === -1) {
-        throw new Error("Product not found!");
-      }
-
-      const updatedProduct = {
-        ...products[productIndex],
-        ...updates,
-      };
-
-      products[productIndex] = updatedProduct;
-      return updatedProduct;
+    updateProduct: async (_, { id, ...updates }) => {
+      return await Product.findByIdAndUpdate(id, updates, { new: true });
     },
   },
 };
