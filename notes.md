@@ -658,3 +658,17 @@ server.listen().then(({ url }) => {
   console.log(`Server ready at ${url}`);
 });
 ```
+
+## NodeJS with TypeScript
+- TypeScript is a superset of JavaScript that adds static typing and other features to the language.
+- Using TypeScript with Node.js can help catch errors at compile time, improve code readability, and enhance developer productivity.
+
+### Setting up a Node.js project with TypeScript
+1. **Initialize a Node.js Project**: Create a new directory for your project and run `npm init -y` to generate a `package.json` file.
+2. **Install TypeScript**: Run `npm install typescript --save-dev` to install TypeScript as a development dependency.
+3. **Install Type Definitions**: For Node.js, install the type definitions by running `npm install @types/node --save-dev`.
+4. **Create a tsconfig.json File**: Run `npx tsc --init` to generate a `tsconfig.json` file. This file contains TypeScript compiler options.
+5. **Create Source Files**: Create a `src` directory and add your TypeScript files (e.g., `app.ts`).
+6. **Compile TypeScript**: Run `npx tsc` to compile your TypeScript files into JavaScript. The compiled files will be placed in a `dist` directory (or as specified in your `tsconfig.json`).
+7. **Run the Application**: Use `node dist/app.js` to run your compiled JavaScript files.
+
