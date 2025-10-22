@@ -1,6 +1,7 @@
 import e from "express"
 
 import type {Request, Response, NextFunction} from 'express';
+import User, { IUser } from "./models/User.js";
 
 const app: e.Express = e();
 const PORT = 3000;
@@ -32,6 +33,15 @@ app.post('/user', (req: Request<{}, {}, User>, res: Response) => {
     res.json({
         message : `User created successfully!!, Hello ${name}!`
     })
+})
+
+app.get('/users', async (req: Request, res: Response) => {
+    try {
+        const users: IUser[] = await User.find()
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
 })
 
 // user based on ID

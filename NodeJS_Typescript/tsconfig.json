@@ -3,9 +3,11 @@
     // File Layout
     "rootDir": "./src",
     "outDir": "./dist",
+    "types": ["node"],
+    "moduleResolution": "nodenext",
 
     // Environment Settings
-    "module": "es6",
+    "module": "nodenext",
     "target": "es6",
     "lib": ["ES6", "DOM"],
 
