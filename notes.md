@@ -850,3 +850,26 @@ Notes:
 * Add `"skipLibCheck": true` for faster builds (optional).
 * Add `include`/`exclude` entries so `node_modules` is excluded and `src` is included.
 
+
+### Request<>
+- an interface in TypeScript that represents the HTTP request object in Node.js and Express applications.
+- It provides type definitions for properties and methods available on the request object, allowing developers to access request data with type safety and autocompletion in their IDEs.
+
+```javascript
+Request<{
+  params: { id: string };
+  body: { name: string; email: string };
+  query: { search: string };
+}>
+
+```
+- In this example, the Request<> interface is parameterized with three type arguments:
+  1. `params`: An object representing the route parameters, where `id` is a string.
+  2. `body`: An object representing the request body, containing `name` and `email` as strings.
+  3. `query`: An object representing the query parameters, where `search` is a string.
+
+
+```typescript
+interface e.Request<P = ParamsDictionary, ResBody = any, ReqBody = any, ReqQuery = QueryString.ParsedQs, Locals extends Record<string, any> = Record<string, any>>
+
+```
