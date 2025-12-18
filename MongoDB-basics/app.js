@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 // Opens Mongoose's default connection to MongoDB : returns a Promise
 mongoose
-  .connect(
-    "mongodb+srv://rishavgupta2000:rishavgupta2020@cluster0.jxx3v27.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Database connected successfully!!");
   })
@@ -86,13 +85,12 @@ async function runQueryExamples() {
     const updateUser = await User.findByIdAndUpdate(
       newUser._id,
       {
-        $set: { age: 240, name : "ABCDEF" },
+        $set: { age: 240, name: "ABCDEF" },
         $push: { tags: "udp" },
       },
       { new: true }
     );
-    console.log(updateUser)
-
+    console.log(updateUser);
   } catch (error) {
     console.log(error);
   } finally {
